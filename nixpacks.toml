@@ -8,3 +8,13 @@
 NIXPACKS_NODE_VERSION = "24"
 SECRET_KEY_BASE = "precompile_placeholder_nixpacks_build_only_set_real_secret_in_coolify_runtime_01"
 HUSKY = "0"
+
+# Procfile `release:` runs `db:chatwoot_prepare` during the Docker *build* when Nixpacks generates
+# the Dockerfile. On Coolify the PostgreSQL internal hostname is not resolvable at build time, so
+# the step fails with PG::ConnectionBad / name resolution. This override replaces that release phase:
+# write `.git_sha` only (when SOURCE_VERSION is injected by the platform) and run DB prep once after
+# deploy — see deployment/README-coolify.md §3. (Heroku’s default buildpack ignores nixpacks.toml;
+# platforms that use Nixpacks for builds get this behavior.)
+
+[phases.release]
+cmds = ["sh -c 'printf \"%s\" \"${SOURCE_VERSION:-}\" > .git_sha'"]

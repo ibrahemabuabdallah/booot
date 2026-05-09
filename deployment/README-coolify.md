@@ -67,3 +67,13 @@ After fixing Git access, redeploy; the error is **not** caused by PostgreSQL or 
 **Note:** Coolify may warn that `RAILS_ENV=production` during build affects asset precompilation; the placeholder in `nixpacks.toml` addresses the usual failure mode.
 
 **After a successful redeploy:** Run `POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare` once (see §3 above) and ensure Sidekiq uses the same environment variables as the web process.
+
+## 8. Troubleshooting: Nixpacks build fails on `db:chatwoot_prepare` — PostgreSQL host not found
+
+**Symptom:** During image build, `bundle exec rails db:chatwoot_prepare` fails with `ActiveRecord::ConnectionNotEstablished` / `PG::ConnectionBad` / `could not translate host name "<postgresql-service>"` (temporary failure in name resolution).
+
+**Cause:** Nixpacks turns the `release:` line from the root [`Procfile`](../Procfile) into a **Docker build** step. The Coolify PostgreSQL hostname exists only on the **runtime** Docker network, not while the image is building.
+
+**Fix (repo already includes this):** The root [`nixpacks.toml`](../nixpacks.toml) defines `[phases.release]` so the release phase no longer runs `db:chatwoot_prepare` at build time; it only writes `.git_sha` when `SOURCE_VERSION` is set. You **must** still run `POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare` once after the first successful deploy (§3).
+
+**If you deploy without Nixpacks** (e.g. plain `docker/Dockerfile`), this section does not apply; the upstream Dockerfile does not run `db:chatwoot_prepare` at image build time in the same way.
