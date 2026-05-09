@@ -18,7 +18,7 @@ RAILS_ENV=production
 SECRET_KEY_BASE=REPLACE_RUN_bundle_exec_rake_secret
 REDIS_URL=REPLACE_WITH_COOLIFY_REDIS_INTERNAL_URL
 
-FRONTEND_URL=https://sgws4okcc0okgcwgowkos08w.wasilatech.cloud
+FRONTEND_URL=https://saawnous.shop
 FORCE_SSL=true
 RAILS_LOG_TO_STDOUT=true
 RAILS_SERVE_STATIC_FILES=true
