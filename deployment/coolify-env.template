@@ -1,0 +1,24 @@
+# Paste into Coolify → your Chatwoot application → Environment Variables.
+# Apply the SAME set to the Sidekiq worker app if you run one separately.
+#
+# POSTGRES_HOST: use the internal hostname from your PostgreSQL resource in Coolify
+# (e.g. "Internal DNS", service name, or value shown in "Connect" / connection string).
+# Do not use a public IP unless PostgreSQL is intentionally exposed and firewalled.
+
+POSTGRES_HOST=REPLACE_WITH_COOLIFY_POSTGRES_INTERNAL_HOST
+POSTGRES_PORT=5432
+POSTGRES_DATABASE=postgres
+POSTGRES_USERNAME=postgres
+POSTGRES_PASSWORD=REPLACE_WITH_YOUR_DB_PASSWORD
+
+RAILS_ENV=production
+SECRET_KEY_BASE=REPLACE_RUN_bundle_exec_rake_secret
+REDIS_URL=REPLACE_WITH_COOLIFY_REDIS_INTERNAL_URL
+
+FRONTEND_URL=https://sgws4okcc0okgcwgowkos08w.wasilatech.cloud
+FORCE_SSL=true
+RAILS_LOG_TO_STDOUT=true
+RAILS_SERVE_STATIC_FILES=true
+
+# Set true to allow UI signups, false to disable public signup
+ENABLE_ACCOUNT_SIGNUP=true

@@ -1,5 +1,9 @@
 Chatwoot is looking forward to working with security researchers worldwide to keep Chatwoot and our users safe. If you have found an issue in our systems/applications, please reach out to us.
 
+## Self-hosted operators — exposed credentials
+
+If database passwords, API keys, or `SECRET_KEY_BASE` were shared in chat, tickets, or committed by mistake: rotate them in your host (for example Coolify) and update every environment copy (Coolify env, local `.env`, CI secrets, backups). Old values should be treated as compromised. Deployment notes: [deployment/README-coolify.md](deployment/README-coolify.md).
+
 ## Reporting a Vulnerability
 
 We use Github to track the security issues that affect our project. If you believe you have found a vulnerability, please disclose it via this [form](https://github.com/chatwoot/chatwoot/security/advisories/new). This will enable us to review the vulnerability, fix it promptly, and reward you for your efforts.
