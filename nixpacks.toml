@@ -1,0 +1,10 @@
+# Coolify / Railway / Nixpacks: Rails boots full app during `rake assets:precompile` with RAILS_ENV=production.
+# Without SECRET_KEY_BASE at build time you get:
+#   ArgumentError: Missing `secret_key_base` for 'production' environment
+# This placeholder is for asset compilation only. Set a real SECRET_KEY_BASE in Coolify at runtime
+# (e.g. output of `bundle exec rake secret`) for session security.
+
+[variables]
+NIXPACKS_NODE_VERSION = "24"
+SECRET_KEY_BASE = "precompile_placeholder_nixpacks_build_only_set_real_secret_in_coolify_runtime_01"
+HUSKY = "0"

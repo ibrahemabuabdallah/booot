@@ -12,6 +12,9 @@ POSTGRES_USERNAME=postgres
 POSTGRES_PASSWORD=REPLACE_WITH_YOUR_DB_PASSWORD
 
 RAILS_ENV=production
+# Required at runtime for secure sessions/cookies. Generate once: bundle exec rake secret
+# If you build with Nixpacks (no nixpacks.toml), Coolify must expose this at BUILD time too,
+# or use the repo root nixpacks.toml which supplies a build-only placeholder.
 SECRET_KEY_BASE=REPLACE_RUN_bundle_exec_rake_secret
 REDIS_URL=REPLACE_WITH_COOLIFY_REDIS_INTERNAL_URL
 
